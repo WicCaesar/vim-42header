@@ -11,14 +11,13 @@
 " **************************************************************************** "
 
 " ty zaz <3
-let s:asciiart = [
-			\"        :::      ::::::::",
-			\"      :+:      :+:    :+:",
-			\"    +:+ +:+         +:+  ",
-			\"  +#+  +:+       +#+     ",
-			\"+#+#+#+#+#+   +#+        ",
-			\"     #+#    #+#          ",
-			\"    ###   ########.fr    "
+let s:asciiart = [	\"        ⢀⣤⣤⣤⠄⢠⣤⣤⠄⣤⣤⣤⡄",
+			\"	⣠⣾⣿⡿⠋  ⢸⡿⠋ ⣿⣿⣿⡇",
+			\"   ⢀⣴⣾⣿⠟⠁      ⢀⣴⣿⣿⠟⠁",
+			\" ⣠⣾⣿⡿⠋       ⣠⣾⣿⡿⠋    ",
+			\"⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿ ⢸⣿⣿⣿ ⢀⣴⡇",
+			\"⠛⠛⠛⠛⠛⠛⢻⣿⣿⣿ ⠸⠿⠿⠿⠴⠿⠿⠇",
+			\"⠄⠄⠄⠄⠄⠄⢸⣿⣿⣿      | RIO ",
 			\]
 
 let s:start		= '/*'
@@ -83,11 +82,11 @@ function! s:line(n)
 	elseif a:n == 4 " filename
 		return s:textline(s:filename(), s:ascii(a:n))
 	elseif a:n == 6 " author
-		return s:textline("By: " . s:user() . " <" . s:mail() . ">", s:ascii(a:n))
+		return s:textline("Por " . s:user() . " <" . s:mail() . ">", s:ascii(a:n))
 	elseif a:n == 8 " created
-		return s:textline("Created: " . s:date() . " by " . s:user(), s:ascii(a:n))
+		return s:textline("Criado em " . s:date() . " por " . s:user(), s:ascii(a:n))
 	elseif a:n == 9 " updated
-		return s:textline("Updated: " . s:date() . " by " . s:user(), s:ascii(a:n))
+		return s:textline("Alterado em " . s:date() . " por " . s:user(), s:ascii(a:n))
 	endif
 endfunction
 
@@ -122,7 +121,7 @@ function! s:filename()
 endfunction
 
 function! s:date()
-	return strftime("%Y/%m/%d %H:%M:%S")
+	return strftime("%d/%m/%Y %H:%M:%S")
 endfunction
 
 function! s:insert()
@@ -140,7 +139,7 @@ endfunction
 
 function! s:update()
 	call s:filetype()
-	if getline(9) =~ s:start . repeat(' ', s:margin - strlen(s:start)) . "Updated: "
+	if getline(9) =~ s:start . repeat(' ', s:margin - strlen(s:start)) . "Alteração: "
 		if &mod
 			call setline(9, s:line(9))
 		endif
